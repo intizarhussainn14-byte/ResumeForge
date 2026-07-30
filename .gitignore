@@ -1,0 +1,31 @@
+# Dependencies
+**/node_modules
+
+# Build outputs
+**/.next
+**/dist
+**/build
+
+# Environment files
+**/.env
+**/.env.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# IDE
+.vscode
+.cursor
+
+# AI editor files
+**/.agents/
+**/.claude/
+**/.windsurf/
+**/AGENTS.md
+**/CLAUDE.md
+**/skills-lock.json
+
+# OS
+.DS_Store
+Thumbs.db
