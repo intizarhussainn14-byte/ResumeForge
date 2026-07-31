@@ -1,7 +1,16 @@
 import { Request, Response } from "express";
-import { registerSchema } from "../validators/auth.validator.js";
-import { registerUser } from "../services/auth.service.js";
 
+import {
+  registerSchema,
+  loginSchema,
+} from "../validators/auth.validator.js";
+
+import {
+  registerUser,
+  loginUser,
+} from "../services/auth.service.js";
+
+// Register Controller
 export async function register(req: Request, res: Response) {
   try {
     // Validate request body
@@ -14,6 +23,31 @@ export async function register(req: Request, res: Response) {
       success: true,
       message: "User registered successfully.",
       data: user,
+    });
+  } catch (error: any) {
+    return res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+}
+
+// Login Controller
+export async function login(req: Request, res: Response) {
+  try {
+    // Validate request body
+    const validatedData = loginSchema.parse(req.body);
+
+    // Login user
+    const result = await loginUser(
+      validatedData.email,
+      validatedData.password
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "Login successful.",
+      data: result,
     });
   } catch (error: any) {
     return res.status(400).json({
