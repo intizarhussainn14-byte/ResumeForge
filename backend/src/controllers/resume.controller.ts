@@ -6,6 +6,7 @@ import {
     getResumeById,
     deleteResume,
     updateResume,
+    analyzeResumeWithAI,
   } from "../services/resume.service.js";
 
 export async function create(req: Request, res: Response) {
@@ -99,6 +100,35 @@ export async function remove(req: Request, res: Response) {
         success: true,
         message: "Resume updated successfully.",
         data: resume,
+      });
+    } catch (error: any) {
+      return res.status(400).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  }
+  export async function analyze(req: Request, res: Response) {
+    try {
+      const { jobDescription } = req.body;
+  
+      if (!jobDescription) {
+        return res.status(400).json({
+          success: false,
+          message: "Job description is required.",
+        });
+      }
+  
+      const analysis = await analyzeResumeWithAI(
+        req.params.id as string,
+        req.user!.id,
+        jobDescription
+      );
+  
+      return res.status(200).json({
+        success: true,
+        message: "Resume analyzed successfully.",
+        data: analysis,
       });
     } catch (error: any) {
       return res.status(400).json({

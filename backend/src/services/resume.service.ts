@@ -1,4 +1,5 @@
 import prisma from "../lib/prisma.js";
+import { analyzeResume } from "../ai/ats.service.js";
 
 interface CreateResumeData {
   title: string;
@@ -103,4 +104,37 @@ export async function getResumeById(
     });
   
     return updatedResume;
+  }
+  export async function analyzeResumeWithAI(
+    resumeId: string,
+    userId: string,
+    jobDescription: string
+  ) {
+    const resume = await prisma.resume.findFirst({
+      where: {
+        id: resumeId,
+        userId,
+      },
+    });
+  
+    if (!resume) {
+      throw new Error("Resume not found.");
+    }
+  
+    const analysis = await analyzeResume(
+      resume.originalText,
+      jobDescription
+    );
+  
+    await prisma.resume.update({
+      where: {
+        id: resume.id,
+      },
+      data: {
+        optimizedText: analysis.optimizedResume,
+        atsScore: analysis.overallScore,
+      },
+    });
+  
+    return analysis;
   }
