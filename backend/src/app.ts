@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import resumeRoutes from "./routes/resume.routes.js";
 
 import authRoutes from "./routes/auth.routes.js";
 
@@ -13,7 +14,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/auth", authRoutes);
-
+app.use("/api/resumes", resumeRoutes);
 // Health Check
 app.get("/health", (req, res) => {
   res.json({
