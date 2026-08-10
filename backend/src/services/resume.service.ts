@@ -126,6 +126,7 @@ export async function getResumeById(
       jobDescription
     );
   
+    // Update the resume with the optimized version and ATS score
     await prisma.resume.update({
       where: {
         id: resume.id,
@@ -133,8 +134,69 @@ export async function getResumeById(
       data: {
         optimizedText: analysis.optimizedResume,
         atsScore: analysis.overallScore,
+        status: "ANALYZED",
       },
     });
   
-    return analysis;
+    // Save the complete AI analysis
+    const savedAnalysis = await prisma.analysis.upsert({
+      where: {
+        resumeId: resume.id,
+      },
+      update: {
+        overallScore: analysis.overallScore,
+        keywordScore: analysis.keywordScore,
+        skillsScore: analysis.skillsScore,
+        formattingScore: analysis.formattingScore,
+        missingKeywords: analysis.missingKeywords,
+        strengths: analysis.strengths,
+        weaknesses: analysis.weaknesses,
+        suggestions: analysis.suggestions,
+      },
+      create: {
+        resumeId: resume.id,
+        overallScore: analysis.overallScore,
+        keywordScore: analysis.keywordScore,
+        skillsScore: analysis.skillsScore,
+        formattingScore: analysis.formattingScore,
+        missingKeywords: analysis.missingKeywords,
+        strengths: analysis.strengths,
+        weaknesses: analysis.weaknesses,
+        suggestions: analysis.suggestions,
+      },
+    });
+  
+    return {
+      ...analysis,
+      analysisId: savedAnalysis.id,
+    };
+  }
+  export async function getResumeAnalysis(
+    resumeId: string,
+    userId: string
+  ) {
+    const resume = await prisma.resume.findFirst({
+      where: {
+        id: resumeId,
+        userId,
+      },
+      include: {
+        analyses: true,
+      },
+    });
+  
+    if (!resume) {
+      throw new Error("Resume not found.");
+    }
+  
+    const analysis = resume.analyses[0];
+  
+    if (!analysis) {
+      throw new Error("Resume has not been analyzed yet.");
+    }
+  
+    return {
+      ...analysis,
+      optimizedResume: resume.optimizedText,
+    };
   }

@@ -68,6 +68,10 @@ model Analysis {
   keywordScore    Int
   skillsScore     Int
   formattingScore Int
+
+  missingKeywords Json
+  strengths       Json
+  weaknesses      Json
   suggestions     Json
 
   resumeId String @unique

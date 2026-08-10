@@ -54,3 +54,8 @@ export async function analyzeResume(
 
   return response.data.data;
 }
+export async function getResumeAnalysis(id: string) {
+  const response = await api.get(`/resumes/${id}/analysis`);
+
+  return response.data.data;
+}

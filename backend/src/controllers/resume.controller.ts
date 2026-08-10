@@ -7,6 +7,7 @@ import {
     deleteResume,
     updateResume,
     analyzeResumeWithAI,
+    getResumeAnalysis,
   } from "../services/resume.service.js";
 
 export async function create(req: Request, res: Response) {
@@ -132,6 +133,25 @@ export async function remove(req: Request, res: Response) {
       });
     } catch (error: any) {
       return res.status(400).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  }
+  export async function getAnalysis(req: Request, res: Response) {
+    try {
+      const analysis = await getResumeAnalysis(
+        req.params.id as string,
+        req.user!.id
+      );
+  
+      return res.status(200).json({
+        success: true,
+        message: "Resume analysis fetched successfully.",
+        data: analysis,
+      });
+    } catch (error: any) {
+      return res.status(404).json({
         success: false,
         message: error.message,
       });
