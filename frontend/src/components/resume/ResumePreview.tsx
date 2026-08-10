@@ -15,7 +15,7 @@ export default function ResumePreview({
     <Card className="overflow-hidden bg-white shadow-sm">
       {/* Resume Header */}
       <div className="border-b px-8 py-6">
-        <h2 className="text-2xl font-bold">
+        <h2 className="text-2xl font-bold tracking-tight text-gray-900">
           {title}
         </h2>
 
@@ -26,9 +26,24 @@ export default function ResumePreview({
 
       {/* Resume Content */}
       <div className="min-h-[600px] px-8 py-8">
-        <div className="whitespace-pre-wrap text-sm leading-7 text-gray-800">
-          {content}
-        </div>
+        {content ? (
+          <div className="whitespace-pre-wrap break-words text-sm leading-7 text-gray-800">
+            {content}
+          </div>
+        ) : (
+          <div className="flex min-h-[500px] items-center justify-center">
+            <p className="text-center text-sm text-gray-400">
+              Your resume preview will appear here.
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* Footer */}
+      <div className="border-t bg-gray-50 px-8 py-3">
+        <p className="text-center text-xs text-gray-400">
+          ResumeForge
+        </p>
       </div>
     </Card>
   );
