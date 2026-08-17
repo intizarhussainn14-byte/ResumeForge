@@ -1,9 +1,7 @@
 import { z } from "zod";
 
 export const createResumeSchema = z.object({
-  title: z
-    .string()
-    .min(3, "Title must be at least 3 characters"),
+  title: z.string().min(3, "Title must be at least 3 characters"),
 
   originalText: z
     .string()

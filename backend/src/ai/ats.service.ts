@@ -2,10 +2,7 @@ import ai from "../lib/gemini.js";
 import { buildATSPrompt } from "./prompt.js";
 import { parseAIResponse } from "./parser.js";
 
-export async function analyzeResume(
-  resume: string,
-  jobDescription: string
-) {
+export async function analyzeResume(resume: string, jobDescription: string) {
   const prompt = buildATSPrompt(resume, jobDescription);
 
   const response = await ai.models.generateContent({

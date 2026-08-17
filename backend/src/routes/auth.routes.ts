@@ -1,10 +1,6 @@
 import { Router } from "express";
 
-import {
-  register,
-  login,
-  profile,
-} from "../controllers/auth.controller.js";
+import { register, login, profile } from "../controllers/auth.controller.js";
 
 import { protect } from "../middleware/auth.middleware.js";
 

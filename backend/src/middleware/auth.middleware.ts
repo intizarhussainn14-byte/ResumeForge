@@ -15,11 +15,7 @@ declare global {
   }
 }
 
-export function protect(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
+export function protect(req: Request, res: Response, next: NextFunction) {
   try {
     const authHeader = req.headers.authorization;
 

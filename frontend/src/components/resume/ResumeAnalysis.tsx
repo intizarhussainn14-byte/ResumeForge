@@ -44,23 +44,15 @@ function getProgressColor(score: number) {
   return "bg-red-500";
 }
 
-export default function ResumeAnalysis({
-  resumeId,
-}: ResumeAnalysisProps) {
-  const {
-    data: analysis,
-    isLoading,
-    error,
-  } = useResumeAnalysis(resumeId);
+export default function ResumeAnalysis({ resumeId }: ResumeAnalysisProps) {
+  const { data: analysis, isLoading, error } = useResumeAnalysis(resumeId);
 
   const [copied, setCopied] = useState(false);
 
   if (isLoading) {
     return (
       <Card className="mt-6 p-6">
-        <p className="text-gray-500">
-          Loading AI analysis...
-        </p>
+        <p className="text-gray-500">Loading AI analysis...</p>
       </Card>
     );
   }
@@ -69,8 +61,7 @@ export default function ResumeAnalysis({
     return (
       <Card className="mt-6 p-6">
         <p className="text-gray-500">
-          No AI analysis available yet. Analyze your resume
-          to see results.
+          No AI analysis available yet. Analyze your resume to see results.
         </p>
       </Card>
     );
@@ -83,9 +74,7 @@ export default function ResumeAnalysis({
   async function copyOptimizedResume() {
     if (!analysis.optimizedResume) return;
 
-    await navigator.clipboard.writeText(
-      analysis.optimizedResume
-    );
+    await navigator.clipboard.writeText(analysis.optimizedResume);
 
     setCopied(true);
 
@@ -96,12 +85,9 @@ export default function ResumeAnalysis({
   function downloadOptimizedResume() {
     if (!analysis.optimizedResume) return;
 
-    const blob = new Blob(
-      [analysis.optimizedResume],
-      {
-        type: "text/plain;charset=utf-8",
-      }
-    );
+    const blob = new Blob([analysis.optimizedResume], {
+      type: "text/plain;charset=utf-8",
+    });
 
     const url = URL.createObjectURL(blob);
 
@@ -142,9 +128,7 @@ export default function ResumeAnalysis({
     <Card className="mt-6 p-6">
       {/* Header */}
       <div className="mb-6">
-        <h3 className="text-2xl font-semibold">
-          AI Resume Analysis
-        </h3>
+        <h3 className="text-2xl font-semibold">AI Resume Analysis</h3>
 
         <p className="mt-1 text-sm text-gray-500">
           AI-powered ATS analysis of your resume.
@@ -158,19 +142,13 @@ export default function ResumeAnalysis({
             key={item.label}
             className="rounded-lg border bg-white p-4 text-center shadow-sm"
           >
-            <p className="text-sm font-medium text-gray-500">
-              {item.label}
-            </p>
+            <p className="text-sm font-medium text-gray-500">{item.label}</p>
 
             <p
-              className={`mt-2 text-3xl font-bold ${getScoreColor(
-                item.score
-              )}`}
+              className={`mt-2 text-3xl font-bold ${getScoreColor(item.score)}`}
             >
               {item.score}
-              <span className="text-base text-gray-400">
-                /100
-              </span>
+              <span className="text-base text-gray-400">/100</span>
             </p>
 
             <p
@@ -199,26 +177,22 @@ export default function ResumeAnalysis({
       {/* Missing Keywords */}
       {analysis.missingKeywords?.length > 0 && (
         <div className="mt-8">
-          <h4 className="mb-3 text-lg font-semibold">
-            Missing Keywords
-          </h4>
+          <h4 className="mb-3 text-lg font-semibold">Missing Keywords</h4>
 
           <p className="mb-3 text-sm text-gray-500">
-            Consider adding these keywords if they accurately
-            reflect your experience.
+            Consider adding these keywords if they accurately reflect your
+            experience.
           </p>
 
           <div className="flex flex-wrap gap-2">
-            {analysis.missingKeywords.map(
-              (item: string, index: number) => (
-                <span
-                  key={index}
-                  className="rounded-full border border-red-200 bg-red-50 px-3 py-1 text-sm text-red-700"
-                >
-                  {item}
-                </span>
-              )
-            )}
+            {analysis.missingKeywords.map((item: string, index: number) => (
+              <span
+                key={index}
+                className="rounded-full border border-red-200 bg-red-50 px-3 py-1 text-sm text-red-700"
+              >
+                {item}
+              </span>
+            ))}
           </div>
         </div>
       )}
@@ -226,24 +200,18 @@ export default function ResumeAnalysis({
       {/* Strengths */}
       {analysis.strengths?.length > 0 && (
         <div className="mt-8">
-          <h4 className="mb-3 text-lg font-semibold">
-            Strengths
-          </h4>
+          <h4 className="mb-3 text-lg font-semibold">Strengths</h4>
 
           <div className="space-y-2">
-            {analysis.strengths.map(
-              (item: string, index: number) => (
-                <div
-                  key={index}
-                  className="rounded-md border border-green-200 bg-green-50 p-3 text-sm text-green-800"
-                >
-                  <span className="mr-2 font-bold">
-                    ✓
-                  </span>
-                  {item}
-                </div>
-              )
-            )}
+            {analysis.strengths.map((item: string, index: number) => (
+              <div
+                key={index}
+                className="rounded-md border border-green-200 bg-green-50 p-3 text-sm text-green-800"
+              >
+                <span className="mr-2 font-bold">✓</span>
+                {item}
+              </div>
+            ))}
           </div>
         </div>
       )}
@@ -251,24 +219,18 @@ export default function ResumeAnalysis({
       {/* Weaknesses */}
       {analysis.weaknesses?.length > 0 && (
         <div className="mt-8">
-          <h4 className="mb-3 text-lg font-semibold">
-            Weaknesses
-          </h4>
+          <h4 className="mb-3 text-lg font-semibold">Weaknesses</h4>
 
           <div className="space-y-2">
-            {analysis.weaknesses.map(
-              (item: string, index: number) => (
-                <div
-                  key={index}
-                  className="rounded-md border border-orange-200 bg-orange-50 p-3 text-sm text-orange-800"
-                >
-                  <span className="mr-2 font-bold">
-                    ⚠
-                  </span>
-                  {item}
-                </div>
-              )
-            )}
+            {analysis.weaknesses.map((item: string, index: number) => (
+              <div
+                key={index}
+                className="rounded-md border border-orange-200 bg-orange-50 p-3 text-sm text-orange-800"
+              >
+                <span className="mr-2 font-bold">⚠</span>
+                {item}
+              </div>
+            ))}
           </div>
         </div>
       )}
@@ -276,24 +238,18 @@ export default function ResumeAnalysis({
       {/* Suggestions */}
       {analysis.suggestions?.length > 0 && (
         <div className="mt-8">
-          <h4 className="mb-3 text-lg font-semibold">
-            AI Suggestions
-          </h4>
+          <h4 className="mb-3 text-lg font-semibold">AI Suggestions</h4>
 
           <div className="space-y-2">
-            {analysis.suggestions.map(
-              (item: string, index: number) => (
-                <div
-                  key={index}
-                  className="rounded-md border border-blue-200 bg-blue-50 p-3 text-sm text-blue-800"
-                >
-                  <span className="mr-2 font-bold">
-                    💡
-                  </span>
-                  {item}
-                </div>
-              )
-            )}
+            {analysis.suggestions.map((item: string, index: number) => (
+              <div
+                key={index}
+                className="rounded-md border border-blue-200 bg-blue-50 p-3 text-sm text-blue-800"
+              >
+                <span className="mr-2 font-bold">💡</span>
+                {item}
+              </div>
+            ))}
           </div>
         </div>
       )}
@@ -303,13 +259,10 @@ export default function ResumeAnalysis({
         <div className="mt-8">
           <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h4 className="text-lg font-semibold">
-                AI Optimized Resume
-              </h4>
+              <h4 className="text-lg font-semibold">AI Optimized Resume</h4>
 
               <p className="text-sm text-gray-500">
-                Your resume optimized for the selected job
-                description.
+                Your resume optimized for the selected job description.
               </p>
             </div>
 
@@ -322,10 +275,7 @@ export default function ResumeAnalysis({
                 {copied ? "Copied!" : "Copy Resume"}
               </Button>
 
-              <Button
-                type="button"
-                onClick={downloadOptimizedResume}
-              >
+              <Button type="button" onClick={downloadOptimizedResume}>
                 Download Resume
               </Button>
             </div>

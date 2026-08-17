@@ -19,9 +19,7 @@ export default function EditResumeForm({ resume }: Props) {
   const { mutate, isPending } = useUpdateResume();
 
   const [title, setTitle] = useState(resume.title);
-  const [originalText, setOriginalText] = useState(
-    resume.originalText
-  );
+  const [originalText, setOriginalText] = useState(resume.originalText);
 
   const [editing, setEditing] = useState(false);
 
@@ -38,9 +36,7 @@ export default function EditResumeForm({ resume }: Props) {
     }
 
     if (originalText.trim().length < 20) {
-      alert(
-        "Resume must contain at least 20 characters."
-      );
+      alert("Resume must contain at least 20 characters.");
       return;
     }
 
@@ -68,10 +64,7 @@ export default function EditResumeForm({ resume }: Props) {
 
   if (!editing) {
     return (
-      <Button
-        variant="outline"
-        onClick={() => setEditing(true)}
-      >
+      <Button variant="outline" onClick={() => setEditing(true)}>
         Edit
       </Button>
     );
@@ -81,13 +74,10 @@ export default function EditResumeForm({ resume }: Props) {
     <Card className="mt-4 p-6">
       {/* Header */}
       <div className="mb-6">
-        <h3 className="text-xl font-semibold">
-          Edit Resume
-        </h3>
+        <h3 className="text-xl font-semibold">Edit Resume</h3>
 
         <p className="mt-1 text-sm text-gray-500">
-          Update your resume information and preview the
-          changes before saving.
+          Update your resume information and preview the changes before saving.
         </p>
       </div>
 
@@ -106,18 +96,15 @@ export default function EditResumeForm({ resume }: Props) {
             <Input
               id={`resume-title-${resume.id}`}
               value={title}
-              onChange={(e) =>
-                setTitle(e.target.value)
-              }
+              onChange={(e) => setTitle(e.target.value)}
               placeholder="e.g. Full Stack Developer Resume"
             />
 
-            {title.trim().length > 0 &&
-              title.trim().length < 3 && (
-                <p className="text-sm text-red-500">
-                  Title must be at least 3 characters.
-                </p>
-              )}
+            {title.trim().length > 0 && title.trim().length < 3 && (
+              <p className="text-sm text-red-500">
+                Title must be at least 3 characters.
+              </p>
+            )}
           </div>
 
           {/* Resume Content */}
@@ -132,30 +119,24 @@ export default function EditResumeForm({ resume }: Props) {
             <textarea
               id={`resume-content-${resume.id}`}
               value={originalText}
-              onChange={(e) =>
-                setOriginalText(e.target.value)
-              }
+              onChange={(e) => setOriginalText(e.target.value)}
               className="min-h-80 w-full rounded-md border p-3 text-sm outline-none transition focus:ring-2"
               placeholder="Enter your resume content..."
             />
 
             {/* Counters */}
             <div className="flex items-center justify-between text-xs text-gray-500">
-              <span>
-                Minimum 20 characters
-              </span>
+              <span>Minimum 20 characters</span>
 
               <span>
-                {characterCount} characters ·{" "}
-                {wordCount} words
+                {characterCount} characters · {wordCount} words
               </span>
             </div>
 
             {originalText.trim().length > 0 &&
               originalText.trim().length < 20 && (
                 <p className="text-sm text-red-500">
-                  Resume must contain at least 20
-                  characters.
+                  Resume must contain at least 20 characters.
                 </p>
               )}
           </div>
@@ -170,9 +151,7 @@ export default function EditResumeForm({ resume }: Props) {
                 originalText.trim().length < 20
               }
             >
-              {isPending
-                ? "Saving..."
-                : "Save Changes"}
+              {isPending ? "Saving..." : "Save Changes"}
             </Button>
 
             <Button
@@ -187,9 +166,7 @@ export default function EditResumeForm({ resume }: Props) {
 
         {/* Live Preview */}
         <div>
-          <h3 className="mb-3 text-lg font-semibold">
-            Live Preview
-          </h3>
+          <h3 className="mb-3 text-lg font-semibold">Live Preview</h3>
 
           <p className="mb-3 text-sm text-gray-500">
             Preview updates as you edit your resume.
@@ -197,10 +174,7 @@ export default function EditResumeForm({ resume }: Props) {
 
           <ResumePreview
             title={title || "Untitled Resume"}
-            content={
-              originalText ||
-              "Your resume preview will appear here..."
-            }
+            content={originalText || "Your resume preview will appear here..."}
           />
         </div>
       </div>

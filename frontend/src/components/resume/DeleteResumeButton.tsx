@@ -7,9 +7,7 @@ interface Props {
   resumeId: string;
 }
 
-export default function DeleteResumeButton({
-  resumeId,
-}: Props) {
+export default function DeleteResumeButton({ resumeId }: Props) {
   const { mutate, isPending } = useDeleteResume();
 
   function handleDelete() {

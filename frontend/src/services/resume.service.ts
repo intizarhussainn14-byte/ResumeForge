@@ -44,10 +44,7 @@ export async function deleteResume(id: string) {
   await api.delete(`/resumes/${id}`);
 }
 
-export async function analyzeResume(
-  id: string,
-  jobDescription: string
-) {
+export async function analyzeResume(id: string, jobDescription: string) {
   const response = await api.post(`/resumes/${id}/analyze`, {
     jobDescription,
   });

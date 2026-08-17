@@ -20,8 +20,8 @@ export default function LoginPage() {
 
   const errorMessage = loginError
     ? axios.isAxiosError(loginError)
-      ? (loginError.response?.data as { message?: string })?.message ??
-        "Login failed. Please check your credentials."
+      ? ((loginError.response?.data as { message?: string })?.message ??
+        "Login failed. Please check your credentials.")
       : "Login failed. Please check your credentials."
     : null;
 

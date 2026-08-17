@@ -1,13 +1,13 @@
 import { Router } from "express";
 import {
-    create,
-    getAll,
-    getById,
-    remove,
-    update,
-    analyze,
-    getAnalysis,
-  } from "../controllers/resume.controller.js";
+  create,
+  getAll,
+  getById,
+  remove,
+  update,
+  analyze,
+  getAnalysis,
+} from "../controllers/resume.controller.js";
 import { protect } from "../middleware/auth.middleware.js";
 
 const router = Router();

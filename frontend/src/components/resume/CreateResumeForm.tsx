@@ -11,18 +11,12 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 
 const schema = z.object({
-  title: z
-    .string()
-    .trim()
-    .min(3, "Title must be at least 3 characters."),
+  title: z.string().trim().min(3, "Title must be at least 3 characters."),
 
   originalText: z
     .string()
     .trim()
-    .min(
-      20,
-      "Resume must contain at least 20 characters."
-    ),
+    .min(20, "Resume must contain at least 20 characters."),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -56,26 +50,18 @@ export default function CreateResumeForm() {
     <Card className="p-6">
       {/* Header */}
       <div className="mb-6">
-        <h2 className="text-xl font-semibold">
-          Create New Resume
-        </h2>
+        <h2 className="text-xl font-semibold">Create New Resume</h2>
 
         <p className="mt-1 text-sm text-gray-500">
-          Add your resume information to start analyzing
-          and optimizing it with AI.
+          Add your resume information to start analyzing and optimizing it with
+          AI.
         </p>
       </div>
 
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="space-y-5"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         {/* Resume Title */}
         <div className="space-y-2">
-          <label
-            htmlFor="resume-title"
-            className="text-sm font-medium"
-          >
+          <label htmlFor="resume-title" className="text-sm font-medium">
             Resume Title
           </label>
 
@@ -86,18 +72,13 @@ export default function CreateResumeForm() {
           />
 
           {errors.title && (
-            <p className="text-sm text-red-500">
-              {errors.title.message}
-            </p>
+            <p className="text-sm text-red-500">{errors.title.message}</p>
           )}
         </div>
 
         {/* Resume Content */}
         <div className="space-y-2">
-          <label
-            htmlFor="resume-content"
-            className="text-sm font-medium"
-          >
+          <label htmlFor="resume-content" className="text-sm font-medium">
             Resume Content
           </label>
 
@@ -113,13 +94,9 @@ Next.js, Node.js, TypeScript...`}
           />
 
           <div className="flex items-center justify-between text-xs text-gray-500">
-            <span>
-              Minimum 20 characters
-            </span>
+            <span>Minimum 20 characters</span>
 
-            <span>
-              {watch("originalText")?.length ?? 0} characters
-            </span>
+            <span>{watch("originalText")?.length ?? 0} characters</span>
           </div>
 
           {errors.originalText && (
@@ -131,19 +108,12 @@ Next.js, Node.js, TypeScript...`}
 
         {/* Submit */}
         <div className="flex items-center gap-3">
-          <Button
-            type="submit"
-            disabled={isPending}
-          >
-            {isPending
-              ? "Creating Resume..."
-              : "Create Resume"}
+          <Button type="submit" disabled={isPending}>
+            {isPending ? "Creating Resume..." : "Create Resume"}
           </Button>
 
           {isPending && (
-            <p className="text-sm text-gray-500">
-              Saving your resume...
-            </p>
+            <p className="text-sm text-gray-500">Saving your resume...</p>
           )}
         </div>
       </form>

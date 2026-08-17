@@ -1,8 +1,5 @@
-export function buildATSPrompt(
-    resume: string,
-    jobDescription: string
-  ) {
-    return `
+export function buildATSPrompt(resume: string, jobDescription: string) {
+  return `
   You are an expert ATS (Applicant Tracking System) resume reviewer.
   
   Analyze the following resume against the given job description.
@@ -27,4 +24,4 @@ export function buildATSPrompt(
   Job Description:
   ${jobDescription}
   `;
-  }
+}

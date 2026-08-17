@@ -11,11 +11,8 @@ interface Props {
   resumeId: string;
 }
 
-export default function AnalyzeResumeForm({
-  resumeId,
-}: Props) {
-  const [jobDescription, setJobDescription] =
-    useState("");
+export default function AnalyzeResumeForm({ resumeId }: Props) {
+  const [jobDescription, setJobDescription] = useState("");
 
   const { mutate, isPending } = useAnalyzeResume();
 
@@ -47,14 +44,11 @@ export default function AnalyzeResumeForm({
     <Card className="mt-4 p-6">
       {/* Header */}
       <div className="mb-4">
-        <h3 className="text-lg font-semibold">
-          Analyze Resume
-        </h3>
+        <h3 className="text-lg font-semibold">Analyze Resume</h3>
 
         <p className="mt-1 text-sm text-gray-500">
-          Paste a job description to compare your resume
-          against the requirements and generate an
-          optimized version.
+          Paste a job description to compare your resume against the
+          requirements and generate an optimized version.
         </p>
       </div>
 
@@ -62,9 +56,7 @@ export default function AnalyzeResumeForm({
       <Textarea
         placeholder="Paste the job description here..."
         value={jobDescription}
-        onChange={(e) =>
-          setJobDescription(e.target.value)
-        }
+        onChange={(e) => setJobDescription(e.target.value)}
         className="min-h-40"
       />
 
@@ -72,13 +64,9 @@ export default function AnalyzeResumeForm({
       <div className="mt-4 flex items-center gap-3">
         <Button
           onClick={handleAnalyze}
-          disabled={
-            isPending || !jobDescription.trim()
-          }
+          disabled={isPending || !jobDescription.trim()}
         >
-          {isPending
-            ? "Analyzing..."
-            : "Analyze Resume"}
+          {isPending ? "Analyzing..." : "Analyze Resume"}
         </Button>
 
         {isPending && (

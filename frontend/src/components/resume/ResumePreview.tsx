@@ -7,10 +7,7 @@ interface ResumePreviewProps {
   content: string;
 }
 
-export default function ResumePreview({
-  title,
-  content,
-}: ResumePreviewProps) {
+export default function ResumePreview({ title, content }: ResumePreviewProps) {
   return (
     <Card className="overflow-hidden bg-white shadow-sm">
       {/* Resume Header */}
@@ -19,9 +16,7 @@ export default function ResumePreview({
           {title}
         </h2>
 
-        <p className="mt-1 text-sm text-gray-500">
-          Resume Preview
-        </p>
+        <p className="mt-1 text-sm text-gray-500">Resume Preview</p>
       </div>
 
       {/* Resume Content */}
@@ -41,9 +36,7 @@ export default function ResumePreview({
 
       {/* Footer */}
       <div className="border-t bg-gray-50 px-8 py-3">
-        <p className="text-center text-xs text-gray-400">
-          ResumeForge
-        </p>
+        <p className="text-center text-xs text-gray-400">ResumeForge</p>
       </div>
     </Card>
   );
